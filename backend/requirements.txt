@@ -9,3 +9,5 @@ pymongo==4.6.0
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.4.0
 python-multipart==0.0.18
+# Required for mongodb+srv DNS resolution
+dnspython==2.6.0
