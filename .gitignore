@@ -39,3 +39,6 @@ logs/
 # Database
 *.db
 *.sqlite3
+
+# Vercel
+.vercel

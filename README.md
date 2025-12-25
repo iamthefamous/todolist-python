@@ -177,6 +177,74 @@ To deploy changes:
 flyctl deploy
 ```
 
+## 🚀 Deployment to Vercel
+
+This application is ready to be deployed to Vercel using the provided configuration.
+
+### Prerequisites
+
+1. Install the Vercel CLI (optional): `npm i -g vercel`
+2. Sign up for a Vercel account: https://vercel.com/signup
+3. Set up a MongoDB database (MongoDB Atlas recommended)
+
+### Deployment Steps
+
+#### Option 1: Deploy via Vercel Dashboard (Recommended)
+
+1. **Push your code to GitHub** (if not already done)
+
+2. **Import the project in Vercel:**
+   - Go to https://vercel.com/new
+   - Import your GitHub repository
+   - Vercel will automatically detect the Python project
+
+3. **Configure environment variables:**
+   - In the project settings, add the following environment variables:
+     - `MONGODB_URL`: Your MongoDB connection string (e.g., `mongodb+srv://username:password@cluster.mongodb.net/todolist_db`)
+     - `SECRET_KEY`: A secure secret key for JWT tokens (generate with `openssl rand -hex 32`)
+
+4. **Deploy:**
+   - Click "Deploy"
+   - Vercel will build and deploy your application
+
+Your application will be available at `https://your-project-name.vercel.app`
+
+#### Option 2: Deploy via Vercel CLI
+
+1. **Login to Vercel:**
+   ```bash
+   vercel login
+   ```
+
+2. **Set up environment variables:**
+   ```bash
+   vercel env add MONGODB_URL
+   vercel env add SECRET_KEY
+   ```
+   
+   Enter the values when prompted.
+
+3. **Deploy the application:**
+   ```bash
+   vercel --prod
+   ```
+
+4. **Check the deployment:**
+   - Your application will be deployed and the URL will be displayed
+   - Visit `https://your-project-name.vercel.app/docs` for API documentation
+
+### Environment Variables Required
+
+- `MONGODB_URL`: MongoDB connection string (e.g., from MongoDB Atlas)
+- `SECRET_KEY`: Secret key for JWT token generation
+
+### Notes
+
+- Vercel deploys Python applications as serverless functions
+- The application will automatically scale based on demand
+- MongoDB Atlas is recommended for the database (free tier available)
+- Cold starts may occur on the free tier after periods of inactivity
+
 ## 🐳 Docker Deployment
 
 The application includes Docker support for containerized deployment.
