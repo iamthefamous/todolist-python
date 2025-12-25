@@ -21,7 +21,131 @@ Check if the API is running.
 
 ---
 
-### Todo Operations
+## Authentication
+
+### POST `/api/auth/register`
+Register a new user account.
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "username": "johndoe",
+  "password": "securepassword123"
+}
+```
+
+**Fields:**
+- `email` (required, string): Valid email address (must be unique)
+- `username` (required, string, 3-50 chars): Username (must be unique)
+- `password` (required, string, 6-100 chars): User password
+
+**Response:** `201 Created`
+```json
+{
+  "id": "507f1f77bcf86cd799439011",
+  "email": "user@example.com",
+  "username": "johndoe",
+  "createdAt": "2025-12-25T10:00:00",
+  "updatedAt": "2025-12-25T10:00:00"
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Email already registered or username already taken
+- `422 Unprocessable Entity`: Invalid data format
+
+**Example:**
+```bash
+curl -X POST http://localhost:8080/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "username": "johndoe",
+    "password": "securepassword123"
+  }'
+```
+
+---
+
+### POST `/api/auth/login`
+Login with email and password to receive a JWT access token.
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "securepassword123"
+}
+```
+
+**Fields:**
+- `email` (required, string): User email address
+- `password` (required, string): User password
+
+**Response:** `200 OK`
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer"
+}
+```
+
+**Error Responses:**
+- `401 Unauthorized`: Invalid email or password
+
+**Example:**
+```bash
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword123"
+  }'
+```
+
+---
+
+### GET `/api/auth/me`
+Get the current authenticated user's profile.
+
+**Authentication Required:** Yes (JWT Bearer token)
+
+**Headers:**
+```
+Authorization: Bearer <access_token>
+```
+
+**Response:** `200 OK`
+```json
+{
+  "id": "507f1f77bcf86cd799439011",
+  "email": "user@example.com",
+  "username": "johndoe",
+  "createdAt": "2025-12-25T10:00:00",
+  "updatedAt": "2025-12-25T10:00:00"
+}
+```
+
+**Error Responses:**
+- `401 Unauthorized`: Missing or invalid token
+
+**Example:**
+```bash
+# First login to get token
+TOKEN=$(curl -s -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "securepassword123"}' \
+  | jq -r '.access_token')
+
+# Then use token to get profile
+curl -X GET http://localhost:8080/api/auth/me \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+---
+
+## Todo Operations
 
 #### GET `/api/todos`
 Get all todos with optional filtering.
