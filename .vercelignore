@@ -8,8 +8,6 @@ venv/
 env/
 ENV/
 .venv
-pip-log.txt
-pip-delete-this-directory.txt
 .pytest_cache/
 .coverage
 htmlcov/
@@ -20,6 +18,7 @@ build/
 # Environment
 .env
 .env.local
+.env.example
 
 # IDE
 .vscode/
@@ -36,9 +35,22 @@ Thumbs.db
 *.log
 logs/
 
-# Database
-*.db
-*.sqlite3
+# Git
+.git/
+.gitignore
 
-# Vercel
-.vercel
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Fly.io
+fly.toml
+
+# Scripts
+start-backend.sh
+
+# Tests (if any)
+tests/
+test_*.py
+*_test.py
