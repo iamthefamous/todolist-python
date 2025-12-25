@@ -9,6 +9,10 @@ A full-stack TodoList application built with **Vite + React** (frontend), **Pyth
 - ✅ Edit todo title and description
 - ✅ Filter todos (All, Active, Completed)
 - ✅ Search todos by title
+- ✅ User authentication with JWT tokens
+- ✅ Secure password hashing with bcrypt
+- ✅ User registration and login
+- ✅ Protected API endpoints
 - ✅ Responsive and modern UI
 - ✅ RESTful API architecture
 - ✅ MongoDB database integration
@@ -201,6 +205,14 @@ docker run -p 8080:8080 -e MONGODB_URL=mongodb://host.docker.internal:27017 todo
 ```
 
 ## 🔌 API Endpoints
+
+### Authentication Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login and get JWT token |
+| GET | `/api/auth/me` | Get current user profile (requires authentication) |
 
 ### Todo Endpoints
 
