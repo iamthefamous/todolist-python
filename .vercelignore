@@ -50,10 +50,6 @@ fly.toml
 # Scripts
 start-backend.sh
 
-# Documentation (optional, can include if needed)
-CONTRIBUTING.md
-API.md
-
 # Tests (if any)
 tests/
 test_*.py
