@@ -7,7 +7,7 @@ app = 'todolist-python-api'
 primary_region = 'iad'
 
 [build]
-  dockerfile = 'backend/Dockerfile'
+  dockerfile = 'Dockerfile'
 
 [env]
   PORT = '8080'
