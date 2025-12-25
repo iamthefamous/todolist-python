@@ -180,6 +180,9 @@ async def delete_todo(todo_id: str):
 async def delete_all_todos():
     """
     Delete all todos
+    
+    WARNING: This endpoint is intended for development/testing only.
+    In production, this should be protected with proper authentication/authorization.
     """
     db = await get_database()
     await db.todos.delete_many({})

@@ -18,7 +18,9 @@ async def get_database():
 async def connect_to_mongo():
     """Create database connection"""
     mongodb_url = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
-    print(f"Connecting to MongoDB at {mongodb_url}")
+    # Log connection without credentials
+    safe_url = mongodb_url.split('@')[-1] if '@' in mongodb_url else mongodb_url
+    print(f"Connecting to MongoDB at {safe_url}")
     db.client = AsyncIOMotorClient(mongodb_url)
     print("Connected to MongoDB successfully")
 
