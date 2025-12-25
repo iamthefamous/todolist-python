@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status, Depends
-from datetime import datetime
+from datetime import datetime, timezone
 from bson import ObjectId
 
 from app.models.user import UserCreate, UserLogin, UserResponse, Token
@@ -49,7 +49,7 @@ async def register(user: UserCreate):
     hashed_password = get_password_hash(user.password)
     
     # Create user document
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     user_dict = {
         "email": user.email,
         "username": user.username,

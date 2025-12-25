@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Any
 from pydantic import BaseModel, Field, EmailStr, GetCoreSchemaHandler
 from pydantic_core import core_schema
@@ -35,6 +35,11 @@ class PyObjectId(ObjectId):
         raise ValueError("Invalid ObjectId")
 
 
+def utc_now():
+    """Return current UTC time"""
+    return datetime.now(timezone.utc)
+
+
 class UserBase(BaseModel):
     """Base User model with common fields"""
     email: EmailStr = Field(..., description="User email address")
@@ -56,8 +61,8 @@ class UserInDB(UserBase):
     """Model representing a User in the database"""
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     hashed_password: str
-    createdAt: datetime = Field(default_factory=datetime.utcnow)
-    updatedAt: datetime = Field(default_factory=datetime.utcnow)
+    createdAt: datetime = Field(default_factory=utc_now)
+    updatedAt: datetime = Field(default_factory=utc_now)
 
     class Config:
         populate_by_name = True
