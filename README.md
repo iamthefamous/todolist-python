@@ -22,16 +22,14 @@ A full-stack TodoList application built with **Vite + React** (frontend), **Pyth
 
 ```
 todolist-python/
-├── backend/                    # FastAPI backend
-│   ├── app/
-│   │   ├── config/            # Database configuration
-│   │   ├── models/            # Pydantic models
-│   │   ├── routers/           # API routes
-│   │   └── main.py            # FastAPI application
-│   ├── requirements.txt       # Python dependencies
-│   ├── Dockerfile             # Docker configuration
-│   └── .env.example           # Environment variables template
-│
+├── app/                       # FastAPI backend application
+│   ├── config/                # Database configuration
+│   ├── models/                # Pydantic models
+│   ├── routers/               # API routes
+│   └── main.py                # FastAPI application
+├── requirements.txt           # Python dependencies
+├── Dockerfile                 # Docker configuration
+├── .env.example               # Environment variables template
 ├── docker-compose.yml         # Docker Compose configuration
 ├── fly.toml                   # Fly.io deployment config
 └── start-backend.sh           # Backend startup script
@@ -63,7 +61,7 @@ This will start MongoDB on port 27017.
 
 2. MongoDB will run on the default port 27017
 
-3. Update database URL in `backend/.env`:
+3. Update database URL in `.env`:
    ```
    MONGODB_URL=mongodb://localhost:27017
    ```
@@ -90,33 +88,28 @@ For the easiest setup experience, use the provided shell script:
 
 #### Backend (FastAPI)
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Create a virtual environment:
+1. Create a virtual environment in the project root:
    ```bash
    python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Create `.env` file:
+3. Create `.env` file:
    ```bash
    cp .env.example .env
    ```
 
-5. Start the development server:
+4. Start the development server:
    ```bash
    uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
    ```
 
-6. The backend server will start at `http://localhost:8080`
+5. The backend server will start at `http://localhost:8080`
    - API documentation: `http://localhost:8080/docs`
    - Alternative docs: `http://localhost:8080/redoc`
 
@@ -199,7 +192,6 @@ This will start both MongoDB and the backend in containers.
 ### Build Docker Image Manually:
 
 ```bash
-cd backend
 docker build -t todolist-backend .
 docker run -p 8080:8080 -e MONGODB_URL=mongodb://host.docker.internal:27017 todolist-backend
 ```

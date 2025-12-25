@@ -5,8 +5,8 @@
 
 echo "🚀 Starting TodoList Backend..."
 
-# Navigate to backend directory
-cd "$(dirname "$0")/backend" || exit 1
+# Navigate to the repository root
+cd "$(dirname "$0")" || exit 1
 
 # Check if Python is installed
 if ! command -v python3 &> /dev/null; then
